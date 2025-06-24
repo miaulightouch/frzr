@@ -326,7 +326,11 @@ main() {
 	fi
 
 	mkdir -p ${MOUNT_PATH}/boot/${NAME}
-	cp ${SUBVOL}/boot/vmlinuz-linux ${MOUNT_PATH}/boot/${NAME}
+	MOK_KEY="${MOUNT_PATH}/var/MOK.key"
+	MOK_CRT="${MOUNT_PATH}/var/MOK.crt"
+	sbsign --key ${MOK_KEY} --cert ${MOK_CRT} \
+		--output ${MOUNT_PATH}/boot/${NAME}/vmlinuz-linux \
+		${SUBVOL}/boot/vmlinuz-linux
 	cp ${SUBVOL}/boot/initramfs-linux.img ${MOUNT_PATH}/boot/${NAME}
 
 	AMD_UCODE=""
