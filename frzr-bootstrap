@@ -62,7 +62,7 @@ if [ "${REPAIR}" == true ]; then
 		openssl x509 -outform DER -in ${MOK_CRT} -out ${MOK_CERT}
 		echo "Secure boot key created."
 	fi
-	sbsign --key ${MOK_KEY} --cert ${MOK_CRT} --output ${MOUNT_PATH}/boot/EFI/BOOT/grubx64.EFI ${MOUNT_PATH}/boot/EFI/BOOT/BOOTx64.efi
+	sbsign --key ${MOK_KEY} --cert ${MOK_CRT} --output ${MOUNT_PATH}/boot/EFI/BOOT/grubx64.efi ${MOUNT_PATH}/boot/EFI/BOOT/BOOTx64.EFI
 	# replace the sign of the kernel with the new MOK key
 	for vmlinuz in ${MOUNT_PATH}/boot/*/vmlinuz-linux; do
 		sbsign --key "${MOK_KEY}" --cert "${MOK_CRT}" --output "${vmlinuz}" "${vmlinuz}"
@@ -135,7 +135,7 @@ if [ -e "${MOK_KEY}" ] && [ -e "${MOK_CERT}" ]; then
 	openssl x509 -outform DER -in ${MOK_CRT} -out ${MOK_CERT}
 	echo "Secure boot key created."
 fi
-sbsign --key ${MOK_KEY} --cert ${MOK_CRT} --output ${MOUNT_PATH}/boot/EFI/BOOT/grubx64.EFI ${MOUNT_PATH}/boot/EFI/BOOT/BOOTx64.efi
+sbsign --key ${MOK_KEY} --cert ${MOK_CRT} --output ${MOUNT_PATH}/boot/EFI/BOOT/grubx64.efi ${MOUNT_PATH}/boot/EFI/BOOT/BOOTx64.EFI
 cp ${MOUNT_PATH}/usr/share/shim-signed/shimx64.efi ${MOUNT_PATH}/boot/EFI/BOOT/BOOTx64.EFI
 cp ${MOUNT_PATH}/usr/share/shim-signed/mmx64.efi ${MOUNT_PATH}/boot/EFI/BOOT/mmx64.efi
 
